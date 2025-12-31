@@ -1,435 +1,431 @@
+"use client";
+
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { 
+  Bot, 
+  Cpu, 
+  Database, 
+  Workflow, 
+  Code2, 
+  ArrowRight, 
+  Zap, 
+  Globe, 
+  Layers, 
+  Sparkles,
+  Terminal,
+  CheckCircle2,
+  Play
+} from "lucide-react";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+// Utility for merging classes
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+// Components
+const Badge = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+  <div className={cn("inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white backdrop-blur-md", className)}>
+    {children}
+  </div>
+);
+
+const Button = ({ children, variant = "primary", className, ...props }: any) => {
+  const variants = {
+    primary: "bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-lg shadow-blue-900/20 hover:shadow-blue-900/40 hover:scale-105",
+    secondary: "bg-white/10 text-white border border-white/10 hover:bg-white/20 backdrop-blur-md",
+    outline: "border border-gray-700 text-gray-300 hover:border-gray-500 hover:text-white"
+  };
+
+  return (
+    <button className={cn("inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-300", variants[variant as keyof typeof variants], className)} {...props}>
+      {children}
+    </button>
+  );
+};
 
 export default function Home() {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
+  
+  const [activeTab, setActiveTab] = useState("chat");
+
   return (
-    <div className="min-h-screen bg-gray-900">
-      {/* Hero Section */}
-      <section className="relative min-h-screen overflow-hidden flex items-center">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0">
-          <Image
-            src="/hero-chat.jpg"
-            alt="Chat Interface Background"
-            fill
-            className="object-cover"
-            priority
-            quality={90}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/95 via-gray-900/90 to-gray-900/85"></div>
-        </div>
+    <div className="relative min-h-screen bg-[#05050A] text-white selection:bg-blue-500/30 overflow-x-hidden font-sans">
+      
+      {/* Background Gradients */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-violet-600/10 blur-[120px]" />
+        <div className="absolute top-[40%] left-[20%] w-[300px] h-[300px] rounded-full bg-cyan-500/5 blur-[100px]" />
+      </div>
+
+      <div className="relative z-10">
         
-        <div className="relative mx-auto w-full max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
-          <div className="mx-auto max-w-5xl">
-            {/* Badge */}
-            <div className="mb-8 flex justify-center">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-                </span>
-                <span className="text-sm font-medium text-white">Đã có sẵn cho Desktop & Mobile</span>
+        {/* Navigation */}
+        <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-[#05050A]/80 backdrop-blur-xl">
+          <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center">
+                <Bot className="h-5 w-5 text-white" />
               </div>
+              <span className="text-xl font-bold tracking-tight">Nexo</span>
             </div>
-
-            {/* Logo & Title */}
-            <div className="mb-8 flex justify-center">
-              <div className="relative">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 opacity-30 blur-3xl"></div>
-                <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-purple-600">
-                  <svg
-                    className="h-12 w-12 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    />
-                  </svg>
-                </div>
-              </div>
+            <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+              <a href="#features" className="hover:text-white transition-colors">Tính năng</a>
+              <a href="#workflows" className="hover:text-white transition-colors">Workflow</a>
+              <a href="#integrations" className="hover:text-white transition-colors">Integrations</a>
+              <a href="https://github.com/magiskboy/nexo" className="hover:text-white transition-colors">GitHub</a>
             </div>
+            <div className="flex items-center gap-4">
+              <Button variant="secondary" className="hidden sm:flex h-9 px-4 py-0 text-sm rounded-lg">Sign In</Button>
+              <Button variant="primary" className="h-9 px-4 py-0 text-sm rounded-lg">Download</Button>
+            </div>
+          </div>
+        </nav>
 
-            <div className="text-center">
-              <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
-                Nexo
-              </h1>
-              <p className="mt-6 text-2xl leading-9 text-gray-300 sm:text-3xl">
-                AI Assistant cho Desktop & Mobile
-              </p>
-              <p className="mt-4 text-lg leading-8 text-gray-400 sm:text-xl">
-                Ứng dụng mạnh mẽ được xây dựng bằng Rust cho tương tác với Large Language Models.
-                <br />
-                <span className="font-semibold text-white">
-                  Hiệu năng cao, đa nền tảng, trải nghiệm mượt mà.
-                </span>
-              </p>
+        {/* Hero Section */}
+        <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-col lg:flex-row items-center gap-16">
               
-              {/* Rust Badge */}
-              <div className="mt-6 flex justify-center">
-                <div className="inline-flex items-center gap-2 rounded-lg border border-orange-500/30 bg-orange-500/10 px-4 py-2 backdrop-blur-sm">
-                  <svg className="h-5 w-5 text-orange-400" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12.13 0C5.396 0 .029 5.367.029 12.092c0 5.344 3.274 9.923 7.933 11.774-.11-.984-.197-2.49.041-3.566.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.13 24c6.624 0 11.99-5.367 11.99-11.991C24.12 5.367 18.754.001 12.13.001z"/>
-                  </svg>
-                  <span className="text-sm font-medium text-orange-300">Powered by Rust</span>
-                </div>
-              </div>
-
-              {/* Key Features Grid */}
-              <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10">
-                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/20">
-                    <svg className="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold text-white">Nhiều LLM Provider</h3>
-                  <p className="mt-2 text-sm text-gray-400">OpenAI, Anthropic, Ollama và nhiều hơn nữa</p>
-                </div>
-
-                <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10">
-                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-purple-500/20">
-                    <svg className="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold text-white">Workflow & Multi-Agent</h3>
-                  <p className="mt-2 text-sm text-gray-400">Thiết kế workflow với giao diện kéo-thả</p>
-                </div>
-
-                <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10">
-                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-green-500/20">
-                    <svg className="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold text-white">Prompt Templates</h3>
-                  <p className="mt-2 text-sm text-gray-400">Tạo và tái sử dụng prompt templates</p>
-                </div>
-
-                <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10">
-                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-orange-500/20">
-                    <svg className="h-6 w-6 text-orange-400" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12.13 0C5.396 0 .029 5.367.029 12.092c0 5.344 3.274 9.923 7.933 11.774-.11-.984-.197-2.49.041-3.566.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.13 24c6.624 0 11.99-5.367 11.99-11.991C24.12 5.367 18.754.001 12.13.001z"/>
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold text-white">Powered by Rust</h3>
-                  <p className="mt-2 text-sm text-gray-400">Hiệu năng cao, an toàn bộ nhớ, đa nền tảng</p>
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
-                <a
-                  href="https://github.com/magiskboy/nexo/releases"
-                  className="group relative w-full overflow-hidden rounded-full bg-white px-8 py-4 text-base font-semibold text-gray-900 shadow-lg transition-all hover:bg-gray-100 hover:shadow-xl sm:w-auto"
+              <div className="flex-1 text-center lg:text-left">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <span className="relative z-10">Tải xuống ngay</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 transition-opacity group-hover:opacity-10"></div>
-                </a>
-                <a
-                  href="#features"
-                  className="group flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10 sm:w-auto"
-                >
-                  Tìm hiểu thêm
-                  <svg className="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </a>
+                  <Badge className="mb-6 border-blue-500/30 bg-blue-500/10 text-blue-300">
+                    <Sparkles className="h-3 w-3 mr-1" />
+                    AI Assistant Thế Hệ Mới
+                  </Badge>
+                  <h1 className="text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
+                    Trợ lý AI <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-violet-400 to-cyan-400">
+                      Đa Năng & Mạnh Mẽ
+                    </span>
+                  </h1>
+                  <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Nexo không chỉ là chat bot. Đó là một không gian làm việc AI hoàn chỉnh với Workflows, Data Connectors và khả năng thực thi code trực tiếp. Dành cho người sáng tạo và chuyên gia.
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                    <Button className="w-full sm:w-auto">
+                      Tải Xuống Ngay <ArrowRight className="h-4 w-4 ml-1" />
+                    </Button>
+                    <Button variant="secondary" className="w-full sm:w-auto">
+                      Xem Demo
+                    </Button>
+                  </div>
+
+                  <div className="mt-10 flex items-center justify-center lg:justify-start gap-6 text-gray-500 text-sm">
+                    <div className="flex items-center gap-2">
+                       <CheckCircle2 className="h-4 w-4 text-blue-500" /> macOS
+                    </div>
+                    <div className="flex items-center gap-2">
+                       <CheckCircle2 className="h-4 w-4 text-blue-500" /> Windows
+                    </div>
+                    <div className="flex items-center gap-2">
+                       <CheckCircle2 className="h-4 w-4 text-blue-500" /> Linux
+                    </div>
+                  </div>
+                </motion.div>
               </div>
 
-              {/* Stats */}
-              <div className="mt-16 grid grid-cols-2 gap-8 border-t border-white/10 pt-12 sm:grid-cols-4">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white sm:text-4xl">10+</div>
-                  <div className="mt-2 text-sm text-gray-400">LLM Providers</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white sm:text-4xl">100%</div>
-                  <div className="mt-2 text-sm text-gray-400">Open Source</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white sm:text-4xl">∞</div>
-                  <div className="mt-2 text-sm text-gray-400">Workflows</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white sm:text-4xl">5+</div>
-                  <div className="mt-2 text-sm text-gray-400">Platforms</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Showcase Section */}
-      <section className="relative overflow-hidden bg-gray-800 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center">
-            <div>
-              <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-                Giao diện hiện đại, trải nghiệm tuyệt vời
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-300">
-                Nexo được xây dựng bằng Rust, mang lại hiệu năng cao và trải nghiệm mượt mà trên cả desktop và mobile. Giao diện tối giản nhưng mạnh mẽ, giúp bạn tập trung vào công việc mà không bị phân tâm. Quản lý workspace, tùy chỉnh cài đặt, và tương tác với AI một cách trực quan và hiệu quả.
-              </p>
-              <div className="mt-10 flex items-center gap-x-6">
-                <a
-                  href="#features"
-                  className="text-base font-semibold leading-6 text-white hover:text-gray-300"
-                >
-                  Xem tính năng <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            </div>
-            <div className="relative h-[400px] overflow-hidden rounded-2xl shadow-2xl lg:h-[500px]">
-              <Image
-                src="/chat-interface.jpg"
-                alt="Giao diện chat với Nexo"
-                fill
-                className="object-cover"
-                quality={90}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="bg-gray-900 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Tính năng nổi bật
-            </h2>
-            <p className="mt-4 text-lg leading-8 text-gray-300">
-              Tất cả sức mạnh bạn cần, trong một giao diện đơn giản
-            </p>
-          </div>
-
-          <div className="mx-auto mt-16 max-w-5xl">
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {/* Feature 1: Multiple LLM Providers */}
-              <div className="group relative rounded-2xl border border-gray-700 bg-gray-800 p-8 shadow-sm transition-all hover:border-gray-600 hover:shadow-lg">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/20">
-                  <svg
-                    className="h-6 w-6 text-blue-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-white">
-                  Nhiều LLM Provider
-                </h3>
-                <p className="mt-3 text-gray-400">
-                  Tích hợp với nhiều nhà cung cấp LLM hàng đầu. Kết nối với OpenAI, Anthropic, Ollama và nhiều hơn nữa với cấu hình linh hoạt.
-                </p>
-              </div>
-
-              {/* Feature 2: Workflow & Multi-Agent */}
-              <div className="group relative rounded-2xl border border-gray-700 bg-gray-800 p-8 shadow-sm transition-all hover:border-gray-600 hover:shadow-lg">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-purple-500/20">
-                  <svg
-                    className="h-6 w-6 text-purple-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-white">
-                  Workflow & Multi-Agent
-                </h3>
-                <p className="mt-3 text-gray-400">
-                  Thiết kế và tự động hóa các workflow phức tạp với giao diện kéo-thả trực quan. Tích hợp MCP rộng rãi để mở rộng khả năng AI.
-                </p>
-              </div>
-
-              {/* Feature 3: Prompting & Templating */}
-              <div className="group relative rounded-2xl border border-gray-700 bg-gray-800 p-8 shadow-sm transition-all hover:border-gray-600 hover:shadow-lg">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-green-500/20">
-                  <svg
-                    className="h-6 w-6 text-green-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-white">
-                  Prompting & Templating
-                </h3>
-                <p className="mt-3 text-gray-400">
-                  Tạo, lưu và tái sử dụng các prompt template với biến số cho các workflow hiệu quả. Tối đa hóa năng suất với hệ thống template mạnh mẽ.
-                </p>
-              </div>
-
-              {/* Feature 4: Data Connector */}
-              <div className="group relative rounded-2xl border border-gray-700 bg-gray-800 p-8 shadow-sm transition-all hover:border-gray-600 hover:shadow-lg sm:col-span-2 lg:col-span-1">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-orange-500/20">
-                  <svg
-                    className="h-6 w-6 text-orange-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-white">
-                  Data Connector
-                </h3>
-                <p className="mt-3 text-gray-400">
-                  Kết nối với các nguồn dữ liệu và cơ sở dữ liệu bên ngoài để nâng cao tương tác AI. Tích hợp dữ liệu thời gian thực vào cuộc trò chuyện của bạn.
-                </p>
-              </div>
-
-              {/* Feature 5: Easy to Use */}
-              <div className="group relative rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-800 to-gray-700 p-8 shadow-sm transition-all hover:border-gray-600 hover:shadow-lg sm:col-span-2">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-purple-600">
-                  <svg
-                    className="h-6 w-6 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-white">
-                  Cực kỳ dễ sử dụng
-                </h3>
-                <p className="mt-3 text-lg text-gray-300">
-                  Tất cả các tính năng mạnh mẽ trên được thiết kế với giao diện trực quan và dễ sử dụng. Không cần kiến thức kỹ thuật phức tạp, chỉ cần bắt đầu và sáng tạo.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* AI Interaction Showcase */}
-      <section className="relative overflow-hidden bg-gray-800 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center">
-            <div className="relative h-[400px] overflow-hidden rounded-2xl shadow-2xl lg:order-2 lg:h-[500px]">
-              <Image
-                src="/ai-conversation.jpg"
-                alt="Giao diện conversation với AI"
-                fill
-                className="object-cover"
-                quality={90}
-              />
-            </div>
-            <div className="lg:order-1">
-              <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-                Tương tác thông minh với AI
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-300">
-                Trải nghiệm cuộc trò chuyện tự nhiên và mạnh mẽ với các mô hình ngôn ngữ lớn. Từ coding, toán học đến các công cụ chuyên biệt - Nexo giúp bạn làm việc hiệu quả hơn với AI.
-              </p>
-              <ul className="mt-10 space-y-4 text-base leading-7 text-gray-300">
-                <li className="flex gap-x-3">
-                  <svg className="h-6 w-5 flex-none text-blue-400" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                  </svg>
-                  <span>Hỗ trợ đa dạng các loại nội dung: code, diagram, rich content</span>
-                </li>
-                <li className="flex gap-x-3">
-                  <svg className="h-6 w-5 flex-none text-blue-400" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                  </svg>
-                  <span>Tích hợp MCP servers để mở rộng khả năng AI</span>
-                </li>
-                <li className="flex gap-x-3">
-                  <svg className="h-6 w-5 flex-none text-blue-400" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                  </svg>
-                  <span>Quản lý workspace và tùy chỉnh theo nhu cầu</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="relative overflow-hidden py-24 sm:py-32">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0">
-          <Image
-            src="/chat-dark.jpg"
-            alt="Chat Interface Dark Mode"
-            fill
-            className="object-cover"
-            quality={90}
-          />
-          <div className="absolute inset-0 bg-gray-900/80"></div>
-        </div>
-        
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Sẵn sàng bắt đầu?
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-gray-300">
-              Tải xuống ngay và trải nghiệm sức mạnh của Nexo
-            </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="https://github.com/magiskboy/nexo/releases"
-                className="rounded-full bg-white px-8 py-4 text-base font-semibold text-gray-900 shadow-lg transition-all hover:bg-gray-100 hover:shadow-xl"
+              {/* Hero Visual */}
+              <motion.div 
+                className="flex-1 w-full max-w-[600px] lg:max-w-none perspective-1000"
+                style={{ y: y1 }}
+                initial={{ opacity: 0, rotateX: 10, scale: 0.9 }}
+                animate={{ opacity: 1, rotateX: 0, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
               >
-                Tải xuống miễn phí
-              </a>
+                <div className="relative rounded-2xl border border-white/10 bg-[#0A0A12] shadow-2xl overflow-hidden aspect-[4/3] group">
+                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-violet-500/5 group-hover:opacity-100 transition-opacity opacity-50" />
+                   
+                   {/* Fake UI Header */}
+                   <div className="h-10 border-b border-white/5 flex items-center px-4 gap-2">
+                     <div className="h-3 w-3 rounded-full bg-red-500/20 border border-red-500/50" />
+                     <div className="h-3 w-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
+                     <div className="h-3 w-3 rounded-full bg-green-500/20 border border-green-500/50" />
+                   </div>
+
+                   {/* Fake UI Body */}
+                   <div className="p-6 flex flex-col h-full relative">
+                      {/* Chat Bubble 1 */}
+                      <div className="flex gap-4 mb-6">
+                        <div className="h-8 w-8 rounded-full bg-blue-600/20 flex items-center justify-center shrink-0">
+                           <Bot className="h-4 w-4 text-blue-400" />
+                        </div>
+                        <div className="space-y-2 max-w-[80%]">
+                           <div className="bg-white/5 rounded-2xl rounded-tl-none p-4 text-sm text-gray-300 border border-white/5">
+                              Chào bạn! Tôi có thể giúp gì cho bạn hôm nay? Tôi có thể phân tích dữ liệu, viết code, hay tạo một workflow tự động hóa.
+                           </div>
+                           {/* Quick Actions */}
+                           <div className="flex gap-2">
+                              <span className="text-xs bg-white/5 border border-white/5 px-2 py-1 rounded-md text-gray-400 hover:text-white cursor-pointer transition">Phân tích CSV</span>
+                              <span className="text-xs bg-white/5 border border-white/5 px-2 py-1 rounded-md text-gray-400 hover:text-white cursor-pointer transition">Tạo React Component</span>
+                           </div>
+                        </div>
+                      </div>
+
+                      {/* Chat Bubble 2 (User) */}
+                      <div className="flex gap-4 mb-6 flex-row-reverse">
+                         <div className="h-8 w-8 rounded-full bg-purple-600/20 flex items-center justify-center shrink-0">
+                            <span className="text-xs font-bold text-purple-400">ME</span>
+                         </div>
+                         <div className="bg-blue-600 text-white rounded-2xl rounded-tr-none p-4 text-sm shadow-lg shadow-blue-900/20">
+                            Hãy tạo một biểu đồ doanh thu từ dữ liệu connector Sales_DB nhé.
+                         </div>
+                      </div>
+
+                      {/* Interactive Chart Placeholder */}
+                      <div className="ml-12 bg-[#0F0F16] border border-white/10 rounded-xl p-4 animate-pulse">
+                         <div className="h-32 flex items-end gap-2 justify-between px-2">
+                            {[40, 70, 45, 90, 60, 80, 50].map((h, i) => (
+                               <motion.div 
+                                 key={i}
+                                 initial={{ height: 0 }}
+                                 animate={{ height: `${h}%` }}
+                                 transition={{ duration: 1, delay: 0.5 + i * 0.1 }}
+                                 className="w-full bg-gradient-to-t from-blue-600/50 to-cyan-400 rounded-t-sm" 
+                               />
+                            ))}
+                         </div>
+                         <div className="mt-2 h-4 w-1/3 bg-white/5 rounded mx-auto" />
+                      </div>
+
+                      {/* Floating Elements */}
+                      <motion.div 
+                        className="absolute -right-12 top-20 bg-[#1A1A24] border border-white/10 p-4 rounded-xl shadow-2xl backdrop-blur-md"
+                        animate={{ y: [0, -20, 0] }}
+                        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                      >
+                         <div className="flex items-center gap-3 mb-2">
+                            <Workflow className="h-5 w-5 text-green-400" />
+                            <span className="font-semibold text-sm">Auto-Workflow</span>
+                         </div>
+                         <div className="space-y-2">
+                            <div className="h-2 w-24 bg-white/10 rounded-full" />
+                            <div className="h-2 w-16 bg-white/10 rounded-full" />
+                         </div>
+                      </motion.div>
+
+                   </div>
+                </div>
+              </motion.div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 py-12">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="border-t border-gray-800 pt-8">
-            <p className="text-center text-sm leading-5 text-gray-400">
-              © 2026 Nexo. All rights reserved.
-            </p>
+        {/* Bento Grid Features */}
+        <section id="features" className="py-24 px-6 relative">
+          <div className="mx-auto max-w-7xl">
+            <div className="text-center mb-16">
+               <h2 className="text-3xl md:text-5xl font-bold mb-4">Sức Mạnh Của Sự Đơn Giản</h2>
+               <p className="text-gray-400 max-w-2xl mx-auto">
+                 Tất cả công cụ bạn cần để làm việc với LLM, được tích hợp trong một giao diện duy nhất.
+               </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+               {/* Feature 1: Large */}
+               <motion.div 
+                 whileHover={{ scale: 1.02 }}
+                 className="md:col-span-2 row-span-1 rounded-3xl border border-white/10 bg-white/[0.02] p-8 relative overflow-hidden group"
+               >
+                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                 <div className="relative z-10">
+                    <div className="h-10 w-10 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4">
+                       <Database className="h-6 w-6 text-blue-400" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-2">Data Connectors</h3>
+                    <p className="text-gray-400 max-w-sm">Kết nối trực tiếp kiến thức của bạn. Support PDF, Notion, Google Drive và SQL Databases.</p>
+                 </div>
+                 {/* Decorative */}
+                 <div className="absolute right-0 bottom-0 w-1/2 h-full opacity-50">
+                    <div className="w-full h-full relative">
+                        {[1, 2, 3].map((i) => (
+                          <div key={i} className={`absolute right-${i * 8} bottom-${i * 8} w-32 h-32 bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm transform rotate-6 translate-x-${i * 10} translate-y-${i * 4}`} />
+                        ))}
+                    </div>
+                 </div>
+               </motion.div>
+
+               {/* Feature 2 */}
+               <motion.div 
+                 whileHover={{ scale: 1.02 }}
+                 className="rounded-3xl border border-white/10 bg-white/[0.02] p-8 relative overflow-hidden group"
+               >
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="relative z-10">
+                    <div className="h-10 w-10 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
+                       <Cpu className="h-6 w-6 text-purple-400" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">Multi-LLM</h3>
+                    <p className="text-sm text-gray-400">Switch giữa GPT-4, Claude 3, và Llama 3 local chỉ với 1 click.</p>
+                  </div>
+               </motion.div>
+
+               {/* Feature 3 */}
+               <motion.div 
+                 whileHover={{ scale: 1.02 }}
+                 className="rounded-3xl border border-white/10 bg-white/[0.02] p-8 relative overflow-hidden group"
+               >
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="relative z-10">
+                    <div className="h-10 w-10 rounded-lg bg-green-500/20 flex items-center justify-center mb-4">
+                       <Layers className="h-6 w-6 text-green-400" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">Prompt Templates</h3>
+                    <p className="text-sm text-gray-400">Lưu trữ và tái sử dụng các prompt kỹ thuật cao một cách có tổ chức.</p>
+                  </div>
+               </motion.div>
+
+               {/* Feature 4: Large */}
+               <motion.div 
+                 whileHover={{ scale: 1.02 }}
+                 className="md:col-span-2 row-span-1 rounded-3xl border border-white/10 bg-white/[0.02] p-8 relative overflow-hidden group"
+               >
+                 <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                 <div className="relative z-10 flex flex-col h-full justify-between">
+                    <div>
+                      <div className="h-10 w-10 rounded-lg bg-orange-500/20 flex items-center justify-center mb-4">
+                         <Workflow className="h-6 w-6 text-orange-400" />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-2">Visual Workflow Builder</h3>
+                      <p className="text-gray-400 max-w-md">Thiết kế agent pipelines bằng cách kéo thả. Tự động hóa công việc phức tạp chưa bao giờ dễ dàng hơn.</p>
+                    </div>
+                    <div className="w-full h-24 bg-white/5 rounded-xl border border-white/10 mt-4 flex items-center justify-center gap-8 overflow-hidden">
+                       <div className="flex items-center gap-2 px-4 py-2 bg-white/10 rounded border border-white/10 text-xs">Input</div>
+                       <ArrowRight className="h-4 w-4 text-gray-600" />
+                       <div className="flex items-center gap-2 px-4 py-2 bg-blue-500/20 text-blue-300 rounded border border-blue-500/30 text-xs">Process</div>
+                       <ArrowRight className="h-4 w-4 text-gray-600" />
+                       <div className="flex items-center gap-2 px-4 py-2 bg-green-500/20 text-green-300 rounded border border-green-500/30 text-xs">Output</div>
+                    </div>
+                 </div>
+               </motion.div>
+            </div>
           </div>
-        </div>
-      </footer>
+        </section>
+
+        {/* Interactive Code/Chart Config Section */}
+        <section className="py-24 px-6 bg-[#030305] border-y border-white/5">
+           <div className="mx-auto max-w-7xl flex flex-col lg:flex-row gap-16 items-center">
+              <div className="flex-1 space-y-8">
+                <h2 className="text-4xl font-bold">Code & Visualize <br /> <span className="text-gray-500">Ngay trên giao diện</span></h2>
+                <div className="space-y-6">
+                   <div 
+                     onMouseEnter={() => setActiveTab('code')}
+                     className={cn("p-6 rounded-2xl border transition-all cursor-pointer", activeTab === 'code' ? "bg-white/5 border-blue-500/50" : "border-transparent opacity-50 hover:opacity-100")}
+                   >
+                      <h3 className="text-xl font-bold flex items-center gap-2"><Terminal className="h-5 w-5" /> Thực thi Code Python/JS</h3>
+                      <p className="text-gray-400 mt-2 text-sm">Chạy code trực tiếp trong sandbox an toàn. Xử lý dữ liệu, crawl web, hoặc tính toán phức tạp.</p>
+                   </div>
+                   
+                   <div 
+                     onMouseEnter={() => setActiveTab('chart')}
+                     className={cn("p-6 rounded-2xl border transition-all cursor-pointer", activeTab === 'chart' ? "bg-white/5 border-purple-500/50" : "border-transparent opacity-50 hover:opacity-100")}
+                   >
+                      <h3 className="text-xl font-bold flex items-center gap-2"><Sparkles className="h-5 w-5" /> Interactive Charts</h3>
+                      <p className="text-gray-400 mt-2 text-sm">Biến dữ liệu thô thành biểu đồ tương tác. Zoom, pan, và export báo cáo.</p>
+                   </div>
+                </div>
+              </div>
+
+              <div className="flex-1 w-full">
+                 <div className="bg-[#0A0A10] rounded-2xl border border-white/10 overflow-hidden shadow-2xl h-[400px] flex flex-col">
+                    <div className="h-10 border-b border-white/5 flex items-center px-4 justify-between bg-white/[0.02]">
+                       <span className="text-xs text-gray-500 font-mono">demo_script.py</span>
+                       <Play className="h-3 w-3 text-green-500" />
+                    </div>
+                    <div className="flex-1 p-6 font-mono text-sm overflow-hidden relative">
+                       {activeTab === 'code' ? (
+                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-1">
+                            <div className="text-pink-400">import <span className="text-white">pandas</span> as <span className="text-white">pd</span></div>
+                            <div className="text-pink-400">import <span className="text-white">matplotlib.pyplot</span> as <span className="text-white">plt</span></div>
+                            <br />
+                            <div className="text-gray-500"># Load data</div>
+                            <div>df = pd.read_csv(<span className="text-green-400">'sales_2025.csv'</span>)</div>
+                            <div>summary = df.groupby(<span className="text-green-400">'category'</span>).sum()</div>
+                            <br />
+                            <div className="text-blue-400">{`print(summary.to_markdown())`}</div>
+                         </motion.div>
+                       ) : (
+                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="h-full flex items-center justify-center">
+                            <div className="flex items-end gap-4 h-48 w-full max-w-sm px-4 border-l border-b border-white/20">
+                               <motion.div initial={{ height: 0 }} animate={{ height: "60%" }} className="flex-1 bg-purple-500/50 rounded-t" />
+                               <motion.div initial={{ height: 0 }} animate={{ height: "80%" }} className="flex-1 bg-blue-500/50 rounded-t" />
+                               <motion.div initial={{ height: 0 }} animate={{ height: "40%" }} className="flex-1 bg-cyan-500/50 rounded-t" />
+                               <motion.div initial={{ height: 0 }} animate={{ height: "90%" }} className="flex-1 bg-pink-500/50 rounded-t" />
+                            </div>
+                         </motion.div>
+                       )}
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </section>
+
+        {/* Integration Marquee (Simulated) */}
+        <section id="integrations" className="py-20 overflow-hidden">
+           <div className="text-center mb-12">
+              <h2 className="text-2xl font-bold text-gray-300">Kết nối với công cụ yêu thích của bạn</h2>
+           </div>
+           
+           <div className="flex gap-12 justify-center opacity-50 grayscale hover:grayscale-0 transition-all duration-500 flex-wrap px-6">
+              {/* Simple Text Placeholders for Logos */}
+              <span className="text-xl font-bold flex items-center gap-2"><Globe className="h-5 w-5" /> Notion</span>
+              <span className="text-xl font-bold flex items-center gap-2"><Database className="h-5 w-5" /> PostgreSQL</span>
+              <span className="text-xl font-bold flex items-center gap-2"><Code2 className="h-5 w-5" /> GitHub</span>
+              <span className="text-xl font-bold flex items-center gap-2"><Bot className="h-5 w-5" /> OpenAI</span>
+              <span className="text-xl font-bold flex items-center gap-2"><Zap className="h-5 w-5" /> Claude</span>
+              <span className="text-xl font-bold flex items-center gap-2"><Layers className="h-5 w-5" /> Slack</span>
+           </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-32 relative px-6">
+           <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent pointer-events-none" />
+           <div className="mx-auto max-w-4xl text-center relative z-10">
+              <h2 className="text-5xl md:text-7xl font-bold mb-8 tracking-tighter">Sẵn sàng nâng cấp <br/> quy trình làm việc?</h2>
+              <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+                 Trải nghiệm trợ lý AI mạnh mẽ nhất ngay trên máy tính của bạn. Mã nguồn mở, riêng tư và hoàn toàn miễn phí cho cá nhân.
+              </p>
+              <Button className="h-14 px-8 text-lg rounded-2xl shadow-blue-500/25">
+                 Tải Nexo v1.0 <ArrowRight className="h-5 w-5 ml-2" />
+              </Button>
+              <p className="mt-6 text-sm text-gray-500">
+                Available for macOS, Windows and Linux.
+              </p>
+           </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="border-t border-white/5 bg-[#020205] py-12 px-6">
+           <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between items-center gap-6">
+              <div className="flex items-center gap-2">
+                 <div className="h-6 w-6 rounded bg-white/10 flex items-center justify-center">
+                    <Bot className="h-4 w-4 text-white" />
+                 </div>
+                 <span className="font-bold">Nexo</span>
+              </div>
+              <div className="text-sm text-gray-500">
+                 © 2025 Nexo Project. Open Source under MIT License.
+              </div>
+              <div className="flex gap-6 text-gray-400">
+                 <a href="#" className="hover:text-white">Privacy</a>
+                 <a href="#" className="hover:text-white">Terms</a>
+                 <a href="#" className="hover:text-white">Twitter</a>
+              </div>
+           </div>
+        </footer>
+
+      </div>
     </div>
   );
 }

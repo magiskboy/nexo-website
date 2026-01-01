@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { 
   Bot, 
   Cpu, 
@@ -16,8 +16,7 @@ import {
   CheckCircle2,
   Play
 } from "lucide-react";
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -33,24 +32,29 @@ const Badge = ({ children, className }: { children: React.ReactNode; className?:
   </div>
 );
 
-const Button = ({ children, variant = "primary", className, ...props }: any) => {
+const Button = ({ children, variant = "primary", className, href, ...props }: any) => {
   const variants = {
     primary: "bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-lg shadow-blue-900/20 hover:shadow-blue-900/40 hover:scale-105",
     secondary: "bg-white/10 text-white border border-white/10 hover:bg-white/20 backdrop-blur-md",
     outline: "border border-gray-700 text-gray-300 hover:border-gray-500 hover:text-white"
   };
 
+  const Component = href ? "a" : "button";
+
   return (
-    <button className={cn("inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-300", variants[variant as keyof typeof variants], className)} {...props}>
+    <Component 
+      href={href}
+      className={cn("inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-300", variants[variant as keyof typeof variants], className)} 
+      {...props}
+    >
       {children}
-    </button>
+    </Component>
   );
 };
 
 export default function Home() {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
   
   const [activeTab, setActiveTab] = useState("chat");
 
@@ -79,11 +83,19 @@ export default function Home() {
               <a href="#features" className="hover:text-white transition-colors">Tính năng</a>
               <a href="#workflows" className="hover:text-white transition-colors">Workflow</a>
               <a href="#integrations" className="hover:text-white transition-colors">Integrations</a>
-              <a href="https://github.com/magiskboy/nexo" className="hover:text-white transition-colors">GitHub</a>
+              <a href="https://nexo-docs.nkthanh.dev" target="_blank" className="hover:text-white transition-colors">Docs</a>
+              <a href="https://github.com/magiskboy/nexo" target="_blank" className="hover:text-white transition-colors">GitHub</a>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="secondary" className="hidden sm:flex h-9 px-4 py-0 text-sm rounded-lg">Sign In</Button>
-              <Button variant="primary" className="h-9 px-4 py-0 text-sm rounded-lg">Download</Button>
+              <Button 
+                variant="primary" 
+                className="h-9 px-4 py-0 text-sm rounded-lg"
+                href="https://github.com/magiskboy/nexo/releases/tag/0.1.0"
+                target="_blank"
+              >
+                Download
+              </Button>
             </div>
           </div>
         </nav>
@@ -114,7 +126,11 @@ export default function Home() {
                   </p>
                   
                   <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-                    <Button className="w-full sm:w-auto">
+                    <Button 
+                      className="w-full sm:w-auto"
+                      href="https://github.com/magiskboy/nexo/releases/tag/0.1.0"
+                      target="_blank"
+                    >
                       Tải Xuống Ngay <ArrowRight className="h-4 w-4 ml-1" />
                     </Button>
                     <Button variant="secondary" className="w-full sm:w-auto">
@@ -350,8 +366,8 @@ export default function Home() {
                             <div className="text-pink-400">import <span className="text-white">matplotlib.pyplot</span> as <span className="text-white">plt</span></div>
                             <br />
                             <div className="text-gray-500"># Load data</div>
-                            <div>df = pd.read_csv(<span className="text-green-400">'sales_2025.csv'</span>)</div>
-                            <div>summary = df.groupby(<span className="text-green-400">'category'</span>).sum()</div>
+                            <div>df = pd.read_csv(<span className="text-green-400">sales_2025.csv</span>)</div>
+                            <div>summary = df.groupby(<span className="text-green-400">category</span>).sum()</div>
                             <br />
                             <div className="text-blue-400">{`print(summary.to_markdown())`}</div>
                          </motion.div>
@@ -396,8 +412,12 @@ export default function Home() {
               <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
                  Trải nghiệm trợ lý AI mạnh mẽ nhất ngay trên máy tính của bạn. Mã nguồn mở, riêng tư và hoàn toàn miễn phí cho cá nhân.
               </p>
-              <Button className="h-14 px-8 text-lg rounded-2xl shadow-blue-500/25">
-                 Tải Nexo v1.0 <ArrowRight className="h-5 w-5 ml-2" />
+              <Button 
+                className="h-14 px-8 text-lg rounded-2xl shadow-blue-500/25"
+                href="https://github.com/magiskboy/nexo/releases/tag/0.1.0"
+                target="_blank"
+              >
+                 Tải Nexo v0.1.0 <ArrowRight className="h-5 w-5 ml-2" />
               </Button>
               <p className="mt-6 text-sm text-gray-500">
                 Available for macOS, Windows and Linux.

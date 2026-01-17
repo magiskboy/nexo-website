@@ -22,7 +22,7 @@ export const headerData: HeaderData = {
   ],
   actions: [
     { text: 'EN', href: getPermalink('/en'), target: '_self', variant: 'link' },
-    { text: 'Tải xuống', href: '#download', icon: 'tabler:download' }
+    { text: 'Tải xuống', href: '#download', icon: 'tabler:download' },
   ],
 };
 
@@ -47,7 +47,7 @@ export const headerDataEn: HeaderData = {
   ],
   actions: [
     { text: 'VI', href: getPermalink('/'), target: '_self', variant: 'link' },
-    { text: 'Download', href: '#download', icon: 'tabler:download' }
+    { text: 'Download', href: '#download', icon: 'tabler:download' },
   ],
 };
 

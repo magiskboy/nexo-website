@@ -1,167 +1,88 @@
-import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
+import { getPermalink, getAsset } from './utils/permalinks';
+import type { HeaderData, FooterData } from '~/types';
 
-export const headerData = {
+export const headerData: HeaderData = {
   links: [
     {
-      text: 'Homes',
-      links: [
-        {
-          text: 'SaaS',
-          href: getPermalink('/homes/saas'),
-        },
-        {
-          text: 'Startup',
-          href: getPermalink('/homes/startup'),
-        },
-        {
-          text: 'Mobile App',
-          href: getPermalink('/homes/mobile-app'),
-        },
-        {
-          text: 'Personal',
-          href: getPermalink('/homes/personal'),
-        },
-      ],
+      text: 'Trang chủ',
+      href: getPermalink('/'),
     },
     {
-      text: 'Pages',
-      links: [
-        {
-          text: 'Features (Anchor Link)',
-          href: getPermalink('/#features'),
-        },
-        {
-          text: 'Services',
-          href: getPermalink('/services'),
-        },
-        {
-          text: 'Pricing',
-          href: getPermalink('/pricing'),
-        },
-        {
-          text: 'About us',
-          href: getPermalink('/about'),
-        },
-        {
-          text: 'Contact',
-          href: getPermalink('/contact'),
-        },
-        {
-          text: 'Terms',
-          href: getPermalink('/terms'),
-        },
-        {
-          text: 'Privacy policy',
-          href: getPermalink('/privacy'),
-        },
-      ],
-    },
-    {
-      text: 'Landing',
-      links: [
-        {
-          text: 'Lead Generation',
-          href: getPermalink('/landing/lead-generation'),
-        },
-        {
-          text: 'Long-form Sales',
-          href: getPermalink('/landing/sales'),
-        },
-        {
-          text: 'Click-Through',
-          href: getPermalink('/landing/click-through'),
-        },
-        {
-          text: 'Product Details (or Services)',
-          href: getPermalink('/landing/product'),
-        },
-        {
-          text: 'Coming Soon or Pre-Launch',
-          href: getPermalink('/landing/pre-launch'),
-        },
-        {
-          text: 'Subscription',
-          href: getPermalink('/landing/subscription'),
-        },
-      ],
+      text: 'Tính năng',
+      href: getPermalink('/#features'),
     },
     {
       text: 'Blog',
-      links: [
-        {
-          text: 'Blog List',
-          href: getBlogPermalink(),
-        },
-        {
-          text: 'Article',
-          href: getPermalink('get-started-website-with-astro-tailwind-css', 'post'),
-        },
-        {
-          text: 'Article (with MDX)',
-          href: getPermalink('markdown-elements-demo-post', 'post'),
-        },
-        {
-          text: 'Category Page',
-          href: getPermalink('tutorials', 'category'),
-        },
-        {
-          text: 'Tag Page',
-          href: getPermalink('astro', 'tag'),
-        },
-      ],
+      href: getPermalink('/blog'),
     },
     {
-      text: 'Widgets',
-      href: '#',
+      text: 'Về chúng tôi',
+      href: getPermalink('/about'),
     },
   ],
-  actions: [{ text: 'Download', href: 'https://github.com/arthelokyo/astrowind', target: '_blank' }],
+  actions: [
+    { text: 'EN', href: getPermalink('/en'), target: '_self', variant: 'link' },
+    { text: 'Tải xuống', href: '#download', icon: 'tabler:download' }
+  ],
 };
 
-export const footerData = {
+export const headerDataEn: HeaderData = {
   links: [
     {
-      title: 'Product',
+      text: 'Home',
+      href: getPermalink('/en'),
+    },
+    {
+      text: 'Features',
+      href: getPermalink('/en#features'),
+    },
+    {
+      text: 'Blog',
+      href: getPermalink('/blog'),
+    },
+    {
+      text: 'About',
+      href: getPermalink('/about'),
+    },
+  ],
+  actions: [
+    { text: 'VI', href: getPermalink('/'), target: '_self', variant: 'link' },
+    { text: 'Download', href: '#download', icon: 'tabler:download' }
+  ],
+};
+
+export const footerData: FooterData = {
+  links: [
+    {
+      title: 'Sản phẩm',
       links: [
-        { text: 'Features', href: '#' },
-        { text: 'Security', href: '#' },
-        { text: 'Team', href: '#' },
-        { text: 'Enterprise', href: '#' },
-        { text: 'Customer stories', href: '#' },
-        { text: 'Pricing', href: '#' },
-        { text: 'Resources', href: '#' },
+        { text: 'Tính năng', href: getPermalink('/#features') },
+        { text: 'Bảo mật', href: getPermalink('/#privacy') },
+        { text: 'Nexo Hub', href: getPermalink('/#hub') },
+        { text: 'Tải xuống', href: '#download' },
       ],
     },
     {
-      title: 'Platform',
+      title: 'Nền tảng hỗ trợ',
       links: [
-        { text: 'Developer API', href: '#' },
-        { text: 'Partners', href: '#' },
-        { text: 'Atom', href: '#' },
-        { text: 'Electron', href: '#' },
-        { text: 'AstroWind Desktop', href: '#' },
+        { text: 'macOS', href: '#download' },
+        { text: 'Windows', href: '#download' },
+        { text: 'Linux', href: '#download' },
       ],
     },
     {
-      title: 'Support',
+      title: 'Tài nguyên',
       links: [
-        { text: 'Docs', href: '#' },
-        { text: 'Community Forum', href: '#' },
-        { text: 'Professional Services', href: '#' },
-        { text: 'Skills', href: '#' },
-        { text: 'Status', href: '#' },
-      ],
-    },
-    {
-      title: 'Company',
-      links: [
-        { text: 'About', href: '#' },
+        { text: 'Tài liệu hướng dẫn', href: '#' },
+        { text: 'Cộng đồng', href: '#' },
         { text: 'Blog', href: '#' },
-        { text: 'Careers', href: '#' },
-        { text: 'Press', href: '#' },
-        { text: 'Inclusion', href: '#' },
-        { text: 'Social Impact', href: '#' },
-        { text: 'Shop', href: '#' },
+      ],
+    },
+    {
+      title: 'Pháp lý',
+      links: [
+        { text: 'Điều khoản sử dụng', href: '#' },
+        { text: 'Chính sách bảo mật', href: '#' },
       ],
     },
   ],
@@ -171,12 +92,61 @@ export const footerData = {
   ],
   socialLinks: [
     { ariaLabel: 'X', icon: 'tabler:brand-x', href: '#' },
-    { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
-    { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
+    { ariaLabel: 'GitHub', icon: 'tabler:brand-github', href: '#' },
+    { ariaLabel: 'Discord', icon: 'tabler:brand-discord', href: '#' },
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
-    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/arthelokyo/astrowind' },
   ],
   footNote: `
-    Made by <a class="text-blue-600 underline dark:text-muted" href="https://github.com/arthelokyo"> Arthelokyo</a> · All rights reserved.
+    © 2025 Nexo Project · All rights reserved.
+  `,
+};
+
+export const footerDataEn: FooterData = {
+  links: [
+    {
+      title: 'Product',
+      links: [
+        { text: 'Features', href: getPermalink('/en#features') },
+        { text: 'Privacy', href: getPermalink('/en#privacy') },
+        { text: 'Nexo Hub', href: getPermalink('/en#hub') },
+        { text: 'Download', href: '#download' },
+      ],
+    },
+    {
+      title: 'Supported Platforms',
+      links: [
+        { text: 'macOS', href: '#download' },
+        { text: 'Windows', href: '#download' },
+        { text: 'Linux', href: '#download' },
+      ],
+    },
+    {
+      title: 'Resources',
+      links: [
+        { text: 'Documentation', href: '#' },
+        { text: 'Community', href: '#' },
+        { text: 'Blog', href: '#' },
+      ],
+    },
+    {
+      title: 'Legal',
+      links: [
+        { text: 'Terms of Use', href: '#' },
+        { text: 'Privacy Policy', href: '#' },
+      ],
+    },
+  ],
+  secondaryLinks: [
+    { text: 'Terms', href: getPermalink('/terms') },
+    { text: 'Privacy Policy', href: getPermalink('/privacy') },
+  ],
+  socialLinks: [
+    { ariaLabel: 'X', icon: 'tabler:brand-x', href: '#' },
+    { ariaLabel: 'GitHub', icon: 'tabler:brand-github', href: '#' },
+    { ariaLabel: 'Discord', icon: 'tabler:brand-discord', href: '#' },
+    { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
+  ],
+  footNote: `
+    © 2025 Nexo Project · All rights reserved.
   `,
 };

@@ -4,16 +4,17 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
+const mainImg = '~/assets/images/main.png';
+const flowEditorImg = '~/assets/images/flow-editor.png';
+const mcpImg = '~/assets/images/mcp.png';
+const modelSelectorImg = '~/assets/images/model-selector.png';
+const agentImg = '~/assets/images/agent.png';
+
 const metadata = {
-  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  title: 'Nexo - Workspace AI cá nhân hóa toàn diện',
   ignoreTitleTemplate: true,
 };
 ---
@@ -25,113 +26,69 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
+        text: 'Tải xuống ngay',
+        href: '#download',
         icon: 'tabler:download',
       },
-      { text: 'Learn more', href: '#features' },
+      { text: 'Tính năng', href: '#features' },
     ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
+    image={{
+      src: mainImg,
+      alt: 'Giao diện Nexo',
+    }}
   >
     <Fragment slot="title">
-      Free template for <span class="hidden xl:inline">creating websites with</span>
-      <span class="text-accent dark:text-white"> Astro 5.0</span> + Tailwind CSS
+      Nexo: <span class="text-accent dark:text-white highlight">Workspace AI All-in-One</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 5.0
-        + Tailwind CSS.</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span>
-      Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages &
-      Blogs.
+      <span class="hidden sm:inline"> Kết hợp Chat AI và công cụ quản lý công việc trong một giao diện duy nhất. </span>
+      Chuyển đổi ý tưởng thành kết quả thực tế với sự hỗ trợ của đa mô hình AI và công cụ trực quan hóa.
+      <br class="hidden sm:block" />
+      <span class="block mt-4 text-sm font-medium text-muted">Hỗ trợ: macOS, Windows, Linux</span>
     </Fragment>
   </Hero>
 
   <!-- Note Widget ******************* -->
 
-  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
-
-  <!-- Features Widget *************** -->
-
-  <Features
-    id="features"
-    tagline="Features"
-    title="What you get with AstroWind"
-    subtitle="One of the most professional and comprehensive templates currently on the market. Most starred & forked Astro theme in 2022, 2023 and 2024."
-    items={[
-      {
-        title: 'Astro + Tailwind CSS Integration',
-        description:
-          'A seamless integration between two great frameworks that offer high productivity, performance and versatility.',
-        icon: 'tabler:brand-tailwind',
-      },
-      {
-        title: 'Ready-to-use Components',
-        description:
-          'Widgets made with Tailwind CSS ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-        icon: 'tabler:components',
-      },
-      {
-        title: 'Best Practices',
-        description:
-          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
-        icon: 'tabler:list-check',
-      },
-      {
-        title: 'Excellent Page Speed',
-        description:
-          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Search Engine Optimization (SEO)',
-        description:
-          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
-        icon: 'tabler:arrows-right-left',
-      },
-      {
-        title: 'Open to new ideas and contributions',
-        description:
-          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
-        icon: 'tabler:bulb',
-      },
-    ]}
+  <Note
+    title="Lợi ích cốt lõi:"
+    description="Tối ưu quy trình làm việc bằng cách tích hợp AI trực tiếp vào môi trường làm việc của bạn."
   />
 
-  <!-- Content Widget **************** -->
+  <!-- Content Widget (Section 1: BYOK) **************** -->
 
   <Content
-    isReversed
-    tagline="Inside template"
-    title="AstroWind's Blueprint: Fun Meets Functionality!"
+    id="features"
+    tagline="Linh hoạt & Tiết kiệm"
+    title="Đa mô hình AI (BYOK)"
     items={[
       {
-        title: 'Built on top of Astro 5.0',
+        title: 'Tự mang key của bạn (BYOK)',
         description:
-          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
+          'Kết nối trực tiếp API của OpenAI, Claude, Gemini hoặc sử dụng mô hình Local (Ollama, LM Studio) để bảo mật dữ liệu.',
+        icon: 'tabler:key',
       },
       {
-        title: 'Styled using Tailwind CSS',
+        title: 'Chuyển đổi mô hình nhanh',
         description:
-          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
+          'Dễ dàng chuyển đổi giữa các mô hình (ví dụ: GPT-4o sang Claude 3.5) ngay trong cuộc hội thoại để phù hợp với từng tác vụ.',
+        icon: 'tabler:arrows-exchange',
       },
       {
-        title: 'Cross-browser compatibility',
-        description:
-          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
+        title: 'Thanh toán trực tiếp',
+        description: 'Không qua trung gian. Bạn trả phí trực tiếp cho nhà cung cấp AI theo nhu cầu sử dụng thực tế.',
+        icon: 'tabler:coin',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Colorful Image',
+      src: modelSelectorImg,
+      alt: 'Cài đặt API và Mô hình',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Building on modern foundations</h3>
-      Gain a competitive advantage by incorporating industry leading practices
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Quyền kiểm soát thuộc về bạn</h3>
+      Lựa chọn mô hình AI phù hợp nhất cho công việc mà không bị khóa chặt vào một nhà cung cấp.
     </Fragment>
 
     <Fragment slot="bg">
@@ -139,261 +96,202 @@ const metadata = {
     </Fragment>
   </Content>
 
-  <!-- Content Widget **************** -->
-
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'High level of customization',
-        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
-      },
-      {
-        title: 'Multiple layout possibilities',
-        description:
-          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
-      },
-      {
-        title: 'Fully responsive design',
-        description:
-          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
-      },
-      {
-        title: 'Integration of media',
-        description:
-          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
-      alt: 'Blueprint Image',
-    }}
-  >
-    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Content Widget **************** -->
+  <!-- Content Widget (Section 2: MCP) **************** -->
 
   <Content
     isReversed
-    isAfterContent
+    tagline="Tích hợp công cụ"
+    title="Giao thức Model Context Protocol (MCP)"
     items={[
       {
-        title: 'Enhanced user engagement',
+        title: 'Thực thi tác vụ',
         description:
-          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
+          'AI có thể tìm kiếm web, gửi tin nhắn Slack/Teams, hoặc tạo trang Notion thay vì chỉ đưa ra văn bản.',
+        icon: 'tabler:activity',
       },
       {
-        title: 'Continuous improvement',
-        description:
-          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
+        title: 'Kết nối ứng dụng',
+        description: 'Tích hợp AI với các công cụ làm việc hiện có của bạn thông qua chuẩn MCP mở rộng.',
+        icon: 'tabler:plug-connected',
       },
       {
-        title: 'Time and resource efficiency',
-        description:
-          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
-      },
-      {
-        title: 'Community support',
-        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
+        title: 'Kiểm soát truy cập',
+        description: 'Người dùng cấp quyền cụ thể cho từng hành động của AI, đảm bảo an toàn và minh bạch.',
+        icon: 'tabler:lock-access',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Astronauts Image',
+      src: mcpImg,
+      alt: 'Tích hợp MCP',
     }}
   >
-    <Fragment slot="content">Designed to foster growth and success.</Fragment>
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Trợ lý làm việc thực thụ</h3>
+      Cho phép AI tương tác trực tiếp với các phần mềm và dữ liệu của bạn để tự động hóa quy trình.
+    </Fragment>
 
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
     </Fragment>
   </Content>
 
-  <!-- Steps Widget ****************** -->
+  <!-- Content Widget (Section 3: Visual) **************** -->
 
-  <Steps
-    title="Get your dream website up and running in no time with AstroWind."
+  <Content
+    tagline="Trực quan hóa"
+    title="Biểu đồ và Lưu đồ"
     items={[
       {
-        title: 'Step 1: <span class="font-medium">Download</span>',
-        description:
-          "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
-        icon: 'tabler:package',
+        title: 'Flow Editor',
+        description: 'Vẽ sơ đồ quy trình và cấu trúc logic để cung cấp ngữ cảnh rõ ràng cho AI.',
+        icon: 'tabler:sitemap',
       },
       {
-        title: 'Step 2: <span class="font-medium">Add content</span>',
+        title: 'Hiển thị kết quả trực quan',
         description:
-          "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
-        icon: 'tabler:letter-case',
+          'AI trả về kết quả dưới dạng biểu đồ (Mermaid, UML) hoặc chạy code (Python/Node.js) ngay trong ứng dụng.',
+        icon: 'tabler:chart-dots',
       },
       {
-        title: 'Step 3: <span class="font-medium">Customize styles</span>',
-        description:
-          'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
-        icon: 'tabler:paint',
-      },
-      {
-        title: 'Ready!',
-        icon: 'tabler:check',
+        title: 'Giảm thiểu sai lệch',
+        description: 'Giao tiếp bằng hình ảnh và sơ đồ giúp AI và người dùng hiểu đúng ý định nhanh chóng hơn.',
+        icon: 'tabler:rocket',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
+      src: flowEditorImg,
+      alt: 'Flow Editor',
     }}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Most used widgets"
-    subtitle="Provides frequently used components for building websites using Tailwind CSS"
-    tagline="Components"
-    items={[
-      {
-        title: 'Headers',
-        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
-        icon: 'flat-color-icons:template',
-      },
-      {
-        title: 'Heros',
-        description:
-          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
-        icon: 'flat-color-icons:gallery',
-      },
-      {
-        title: 'Features',
-        description:
-          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
-        icon: 'flat-color-icons:approval',
-      },
-      {
-        title: 'Content',
-        description:
-          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
-        icon: 'flat-color-icons:document',
-      },
-      {
-        title: 'Call-to-Action',
-        description:
-          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
-        icon: 'flat-color-icons:advertising',
-      },
-      {
-        title: 'Pricing',
-        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
-        icon: 'flat-color-icons:currency-exchange',
-      },
-      {
-        title: 'Testimonial',
-        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
-        icon: 'flat-color-icons:voice-presentation',
-      },
-      {
-        title: 'Contact',
-        description:
-          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
-        icon: 'flat-color-icons:business-contact',
-      },
-      {
-        title: 'Footers',
-        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
-        icon: 'flat-color-icons:database',
-      },
-    ]}
   >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Làm việc trực quan</h3>
+      Thay thế văn bản dài dòng bằng sơ đồ và hình ảnh minh họa dễ hiểu.
+    </Fragment>
+
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
     </Fragment>
-  </Features2>
+  </Content>
 
-  <!-- HighlightedPosts Widget ******* -->
+  <!-- Features Widget (Section 4: Privacy) *************** -->
 
-  <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
-                        Astro is a very interesting technology. Thanks.
-                `}
-  />
-
-  <!-- FAQs Widget ******************* -->
-
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into the powerful features that AstroWind offers and how it can elevate your web development journey."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
+  <Features
+    id="privacy"
+    tagline="Bảo mật & Riêng tư"
+    title="Ưu tiên Local-First"
+    subtitle="Dữ liệu của bạn được lưu trữ cục bộ trên máy tính."
     items={[
       {
-        title: 'Why AstroWind?',
+        title: 'Lưu trữ cục bộ',
         description:
-          "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
+          'Lịch sử chat và Vector Database được lưu trong máy tính của bạn (SQLite), không tải lên đám mây của Nexo.',
+        icon: 'tabler:database',
       },
       {
-        title: 'What do I need to start?',
-        description:
-          'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
+        title: 'Hỗ trợ Offline',
+        description: 'Xem lại lịch sử và sử dụng các mô hình Local LLM mà không cần internet.',
+        icon: 'tabler:wifi-off',
       },
       {
-        title: 'How to install the Astro + Tailwind CSS template?',
-        description:
-          "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.",
-      },
-      {
-        title: "What's something that you don't understand?",
-        description:
-          "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
-      },
-      {
-        title: 'What is something that you would like to try again?',
-        description:
-          "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
-      },
-      {
-        title: 'If you could only ask one question to each person you meet, what would that question be?',
-        description:
-          "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
+        title: 'Minh bạch dữ liệu',
+        description: 'Dữ liệu chỉ được gửi đi khi bạn gọi API của nhà cung cấp LLM (OpenAI, Anthropic...).',
+        icon: 'tabler:shield-lock',
       },
     ]}
   />
 
-  <!-- Stats Widget ****************** -->
+  <!-- Content Widget (Section 5: Hub) **************** -->
 
-  <Stats
-    stats={[
-      { title: 'Downloads', amount: '132K' },
-      { title: 'Stars', amount: '24.8K' },
-      { title: 'Forks', amount: '10.3K' },
-      { title: 'Users', amount: '48.4K' },
+  <Content
+    id="hub"
+    isReversed
+    tagline="Mở rộng"
+    title="Nexo Hub & Agents"
+    items={[
+      {
+        title: 'Tùy chỉnh Agent',
+        description: 'Tạo các Agent chuyên biệt bằng Python/Javascript để phục vụ các tác vụ cụ thể của bạn.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Gọi Agent qua @mention',
+        description:
+          'Triệu hồi các Agent vào cuộc hội thoại bất cứ lúc nào (ví dụ: @Dev, @Analyst) để hỗ trợ giải quyết vấn đề.',
+        icon: 'tabler:at',
+      },
+      {
+        title: 'Cộng đồng chia sẻ',
+        description: 'Tải xuống các bộ công cụ MCP, Agent và Prompt được cộng đồng chia sẻ trên Nexo Hub.',
+        icon: 'tabler:world',
+      },
     ]}
-  />
+    image={{
+      src: agentImg,
+      alt: 'Nexo Hub',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Khả năng mở rộng không giới hạn
+      </h3>
+      Tận dụng sức mạnh từ cộng đồng và khả năng lập trình để tùy biến Nexo theo cách của bạn.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
 
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
+    id="download"
     actions={[
       {
         variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
+        text: 'Windows',
+        href: 'https://github.com/magiskboy/nexo/releases/download/v0.1.0-beta.1/Nexo_0.1.0-beta.1_x64_en-US.msi',
         target: '_blank',
-        icon: 'tabler:download',
+        icon: 'tabler:brand-windows',
+      },
+      {
+        variant: 'secondary',
+        text: 'Linux (AppImage)',
+        href: 'https://github.com/magiskboy/nexo/releases/download/v0.1.0-beta.1/nexo_0.1.0-beta.1_amd64.AppImage',
+        target: '_blank',
+        icon: 'tabler:brand-ubuntu',
       },
     ]}
   >
     <Fragment slot="title">
-      Astro&nbsp;+&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
+      Sẵn sàng <br class="block sm:hidden" /><span class="sm:whitespace-nowrap">nâng cao hiệu suất?</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
+      Tham gia cùng cộng đồng những người tiên phong sử dụng Nexo ngay hôm nay.
+      <div class="mt-6 p-4 bg-blue-50 dark:bg-slate-800 rounded-lg text-left max-w-2xl mx-auto">
+        <p class="font-semibold mb-2 flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+            <path d="M3 7v10a4 4 0 0 0 4 4h10a4 4 0 0 0 4 -4v-10"></path>
+            <path d="M12 7v14"></path>
+          </svg>
+          macOS - Cài đặt qua Homebrew:
+        </p>
+        <pre
+          class="bg-slate-900 text-green-400 p-3 rounded text-sm overflow-x-auto"><code>brew tap nexo-agent/nexo
+brew install --cask nexo</code></pre>
+      </div>
     </Fragment>
   </CallToAction>
 </Layout>

@@ -1,0 +1,296 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Content from '~/components/widgets/Content.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import { headerDataEn, footerDataEn } from '~/navigation';
+
+const mainImg = '~/assets/images/main.png';
+const flowEditorImg = '~/assets/images/flow-editor.png';
+const mcpImg = '~/assets/images/mcp.png';
+const modelSelectorImg = '~/assets/images/model-selector.png';
+const agentImg = '~/assets/images/agent.png';
+
+const metadata = {
+  title: 'Nexo - All-in-One Personalized Workspace AI',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata} headerData={headerDataEn} footerData={footerDataEn} language="en">
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Download Now',
+        href: '#download',
+        icon: 'tabler:download',
+      },
+      { text: 'Features', href: '#features' },
+    ]}
+    image={{
+      src: mainImg,
+      alt: 'Nexo Interface',
+    }}
+  >
+    <Fragment slot="title">
+      Nexo: <span class="text-accent dark:text-white highlight">All-in-One Workspace AI</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline"> Combine Chat AI and task management tools in a single interface. </span>
+      Turn ideas into reality with multi-model AI support and visualization tools.
+      <br class="hidden sm:block" />
+      <span class="block mt-4 text-sm font-medium text-muted">Supports: macOS, Windows, Linux</span>
+    </Fragment>
+  </Hero>
+
+  <!-- Note Widget ******************* -->
+
+  <Note
+    title="Core Benefit:"
+    description="Optimize workflows by integrating AI directly into your working environment."
+  />
+
+  <!-- Content Widget (Section 1: BYOK) **************** -->
+
+  <Content
+    id="features"
+    tagline="Flexible & Cost-Effective"
+    title="Multi-Model AI (BYOK)"
+    items={[
+      {
+        title: 'Bring Your Own Key (BYOK)',
+        description:
+          'Connect direct APIs from OpenAI, Claude, Gemini, or use Local models (Ollama, LM Studio) for maximum data security.',
+        icon: 'tabler:key',
+      },
+      {
+        title: 'Quick Model Switching',
+        description:
+          'Easily switch between models (e.g., GPT-4o to Claude 3.5) within the conversation to suit specific tasks.',
+        icon: 'tabler:arrows-exchange',
+      },
+      {
+        title: 'Direct Payment',
+        description: 'No middleman fees. You pay directly to the AI providers based on your actual usage.',
+        icon: 'tabler:coin',
+      },
+    ]}
+    image={{
+      src: modelSelectorImg,
+      alt: 'Model Selection UI',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">You Have Full Control</h3>
+      Choose the best AI model for your work without being locked into a single provider.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget (Section 2: MCP) **************** -->
+
+  <Content
+    isReversed
+    tagline="Tool Integration"
+    title="Model Context Protocol (MCP)"
+    items={[
+      {
+        title: 'Task Execution',
+        description:
+          'AI can search the web, send Slack/Teams messages, or create Notion pages instead of just outputting text.',
+        icon: 'tabler:activity',
+      },
+      {
+        title: 'App Connectivity',
+        description: 'Integrate AI with your existing work tools via the extensible MCP standard.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'Access Control',
+        description: 'You grant specific permissions for each AI action, ensuring safety and data transparency.',
+        icon: 'tabler:lock-access',
+      },
+    ]}
+    image={{
+      src: mcpImg,
+      alt: 'MCP Integrations',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">A True Work Assistant</h3>
+      Allow AI to interact directly with your software and data to automate workflows.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget (Section 3: Visual) **************** -->
+
+  <Content
+    tagline="Visualization"
+    title="Charts and Flows"
+    items={[
+      {
+        title: 'Flow Editor',
+        description: 'Draw process diagrams and logic structures to provide clear context for AI.',
+        icon: 'tabler:sitemap',
+      },
+      {
+        title: 'Visual Output',
+        description:
+          'AI returns results as dynamic diagrams (Mermaid, UML) or runs code (Python/Node.js) directly within the app.',
+        icon: 'tabler:chart-dots',
+      },
+      {
+        title: 'Minimize Misinterpretation',
+        description: 'Visual communication helps AI and users understand intentions faster and more accurately.',
+        icon: 'tabler:rocket',
+      },
+    ]}
+    image={{
+      src: flowEditorImg,
+      alt: 'Flow Editor',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Work Visually</h3>
+      Replace lengthy text with easy-to-understand diagrams and illustrations.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Features Widget (Section 4: Privacy) *************** -->
+
+  <Features
+    id="privacy"
+    tagline="Security & Privacy"
+    title="Local-First Priority"
+    subtitle="We believe your data is your most valuable asset."
+    items={[
+      {
+        title: 'Local Storage',
+        description:
+          'Chat history and Vector Database are stored locally on your machine (SQLite), not on Nexo clouds.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Offline Support',
+        description: 'Access history and use Local LLM models anytime without internet access.',
+        icon: 'tabler:wifi-off',
+      },
+      {
+        title: 'Data Transparency',
+        description: 'Data is only sent when you explicitly call an LLM provider API (OpenAI, Anthropic...).',
+        icon: 'tabler:shield-lock',
+      },
+    ]}
+  />
+
+  <!-- Content Widget (Section 5: Hub) **************** -->
+
+  <Content
+    id="hub"
+    isReversed
+    tagline="Extensibility"
+    title="Nexo Hub & Agents"
+    items={[
+      {
+        title: 'Custom Agents',
+        description: 'Create specialized Agents using Python/Javascript to serve your specific tasks.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Call Agents via @mention',
+        description: 'Summon Agents into conversation anytime (e.g., @Dev, @Analyst) to help solve problems.',
+        icon: 'tabler:at',
+      },
+      {
+        title: 'Community Sharing',
+        description: 'Download MCP toolkits, Agents, and Prompts shared by the community on Nexo Hub.',
+        icon: 'tabler:world',
+      },
+    ]}
+    image={{
+      src: agentImg,
+      alt: 'Nexo Hub',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Unlimited Extensibility</h3>
+      Leverage community power and programmability to customize Nexo your way.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    id="download"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Windows',
+        href: 'https://github.com/magiskboy/nexo/releases/download/v0.1.0-beta.1/Nexo_0.1.0-beta.1_x64_en-US.msi',
+        target: '_blank',
+        icon: 'tabler:brand-windows',
+      },
+      {
+        variant: 'secondary',
+        text: 'Linux (AppImage)',
+        href: 'https://github.com/magiskboy/nexo/releases/download/v0.1.0-beta.1/nexo_0.1.0-beta.1_amd64.AppImage',
+        target: '_blank',
+        icon: 'tabler:brand-ubuntu',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      Ready to <br class="block sm:hidden" /><span class="sm:whitespace-nowrap">boost your productivity?</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Join the community of pioneers using Nexo today.
+      <div class="mt-6 p-4 bg-blue-50 dark:bg-slate-800 rounded-lg text-left max-w-2xl mx-auto">
+        <p class="font-semibold mb-2 flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+            <path d="M3 7v10a4 4 0 0 0 4 4h10a4 4 0 0 0 4 -4v-10"></path>
+            <path d="M12 7v14"></path>
+          </svg>
+          macOS - Install via Homebrew:
+        </p>
+        <pre
+          class="bg-slate-900 text-green-400 p-3 rounded text-sm overflow-x-auto"><code>brew tap nexo-agent/nexo
+brew install --cask nexo</code></pre>
+      </div>
+    </Fragment>
+  </CallToAction>
+</Layout>

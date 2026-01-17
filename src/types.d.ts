@@ -279,3 +279,31 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
 }
 
 export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
+
+export interface Link {
+  text?: string;
+  href?: string;
+  ariaLabel?: string;
+  icon?: string;
+}
+
+export interface MenuLink extends Link {
+  links?: Array<MenuLink>;
+}
+
+export interface HeaderData {
+  links?: Array<MenuLink>;
+  actions?: Array<CallToAction>;
+  isSticky?: boolean;
+  showToggleTheme?: boolean;
+  showRssFeed?: boolean;
+  position?: string;
+}
+
+export interface FooterData {
+  links?: Array<{ title?: string; links: Array<Link> }>;
+  secondaryLinks?: Array<Link>;
+  socialLinks?: Array<Link>;
+  footNote?: string;
+  theme?: string;
+}
